@@ -2031,7 +2031,6 @@ int drm_fb_helper_initial_config(struct drm_fb_helper *fb_helper, int bpp_sel)
 
 	if (!drm_fbdev_emulation)
 		return 0;
-
 	mutex_lock(&fb_helper->lock);
 	ret = __drm_fb_helper_initial_config_and_unlock(fb_helper, bpp_sel);
 
@@ -2066,7 +2065,6 @@ int drm_fb_helper_hotplug_event(struct drm_fb_helper *fb_helper)
 
 	if (!drm_fbdev_emulation || !fb_helper)
 		return 0;
-
 	mutex_lock(&fb_helper->lock);
 	if (fb_helper->deferred_setup) {
 		err = __drm_fb_helper_initial_config_and_unlock(fb_helper,
@@ -2633,6 +2631,10 @@ void drm_fbdev_generic_setup(struct drm_device *dev,
 	if (!preferred_bpp)
 		preferred_bpp = 32;
 	fb_helper->preferred_bpp = preferred_bpp;
+
+	ret = drm_fbdev_client_hotplug(&fb_helper->client);
+	if (ret)
+		drm_dbg_kms(dev, "client hotplug ret=%d\n", ret);
 
 	drm_client_register(&fb_helper->client);
 }
