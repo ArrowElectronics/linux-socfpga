@@ -48,9 +48,17 @@
 	status = "okay";
 };
 
+&i3c0 {
+	status = "okay";
+};
+
+&i3c1 {
+	status = "okay";
+};
+
 &gmac0 {
 	status = "okay";
-	phy-mode = "rgmii";
+	phy-mode = "rgmii-id";
 	phy-handle = <&emac0_phy0>;
 
 	max-frame-size = <9000>;
@@ -59,15 +67,15 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		compatible = "snps,dwmac-mdio";
-		emac0_phy0: ethernet-phy@1 {
-			reg = <1>;
+		emac0_phy0: ethernet-phy@0 {
+			reg = <0>;
 		};
 	};
 };
 
 &gmac2 {
-	status = "okay";
-	phy-mode = "rgmii";
+	status = "disabled";
+	phy-mode = "rgmii-id";
 	phy-handle = <&emac2_phy0>;
 
 	max-frame-size = <9000>;
@@ -76,8 +84,8 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		compatible = "snps,dwmac-mdio";
-		emac2_phy0: ethernet-phy@1 {
-			reg = <1>;
+		emac2_phy0: ethernet-phy@0 {
+			reg = <0>;
 		};
 	};
 };
