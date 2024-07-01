@@ -23,7 +23,7 @@
 			panic=-1 nosmp rootfstype=ext3";
 	};
 
-	/*leds {
+	leds {
 		compatible = "gpio-leds";
 		
 		hps0 {
@@ -96,7 +96,7 @@
 			gpios = <&led_pio3 0 1>;
 		};									
 
-	}; */
+	}; 
 	
 	gpio-keys {
 		compatible = "gpio-keys";
@@ -128,13 +128,6 @@
 		};		
 	};					
 
-	/*memory {
-		device_type = "memory";
-		reg = <0x0 0x80000000 0x0 0x80000000>;
-		#address-cells = <0x2>;
-		#size-cells = <0x2>;
-		u-boot,dm-pre-reloc;
-	};*/
 	
 	memory {
 		device_type = "memory";
@@ -252,7 +245,7 @@
 			
 			led_pio2: led-pio2@108000050 {
 				compatible = "altr,pio-1.0";
-				reg = <0x00000001 0x01000050 0x10>;
+				reg = <0x00000001 0x08000050 0x10>;
 				altr,ngpio = <3>;
 				#gpio-cells = <2>;
 				gpio-controller;
@@ -260,7 +253,7 @@
 			
 			led_pio3: led-pio3@108000060 {
 				compatible = "altr,pio-1.0";
-				reg = <0x00000001 0x01000060 0x10>;
+				reg = <0x00000001 0x08000060 0x10>;
 				altr,ngpio = <3>;
 				#gpio-cells = <2>;
 				gpio-controller;
