@@ -1,6 +1,6 @@
 // SPDX-License-Identifier:     GPL-2.0
 /*
- * Copyright (C) 2024, Arrow Electronics, Inc.
+ * Copyright (C) 2024, Arrow Electronics, Incorporated.
  */
 #include "../intel/socfpga_agilex5.dtsi"
 
