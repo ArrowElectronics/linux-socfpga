@@ -7,7 +7,7 @@
 
 / {
 	model = "SoCFPGA Agilex5 Arrow AXE5-Eagle";
-	compatible = "intel,socfpga-agilex5-socdk", "intel,socfpga-agilex";
+	compatible = "intel,socfpga-agilex5-socdk", "intel,socfpga-agilex5";
 
 	aliases {
 		serial0 = &uart0;
@@ -135,8 +135,7 @@
 		reg = <0x0 0x0 0x0 0x0>;
 	};	
 	
-
-	soc {
+	soc@0 {
 		sys_hps_bridges: bridge@20000000 {
 			compatible = "simple-bus";
 			reg = <0x20000000 0x20000000>;
@@ -215,6 +214,7 @@
 				#gpio-cells = <2>;
 				gpio-controller;
 			};									
+
 		};				 
 	};
 };
@@ -334,6 +334,10 @@
 };
 
 &usb31 {
+	status = "okay";
+};
+
+&smmu {
 	status = "okay";
 };
 
