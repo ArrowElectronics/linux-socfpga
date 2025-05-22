@@ -1,0 +1,7 @@
+# Enable altera pio functionality
+CONFIG_GPIO_ALTERA=y
+# Enable system id peripheral
+CONFIG_ALTERA_SYSID=y
+# TSN phy support
+CONFIG_ADIN_PHY=y
+CONFIG_ADIN1100_PHY=y

@@ -1,0 +1,41 @@
+// SPDX-License-Identifier:     GPL-2.0
+/*
+ * Copyright (C) 2024, Arrow Electronics, Incorporated.
+ */
+
+/dts-v1/;
+/plugin/;
+
+/ {
+
+	fragment@0 {
+		target-path = "/fpga-region";
+		__overlay__ {
+			firmware-name = "ghrd.core.rbf";
+			config-complete-timeout-us = <30000000>;
+		};
+	};
+	fragment@1 {
+		target-path = "/soc@0";	
+		__overlay__ {	
+		
+			#address-cells = <1>;
+			#size-cells = <1>;		
+			
+			sys_id: sys-id@28000000 {
+				compatible = "altr,sysid-1.0";
+				reg = <0x28000000 0x08>;
+			};
+			
+			led_pio0: led-pio0@28000030 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000030 0x10>;
+				altr,ngpio = <3>;
+				#gpio-cells = <2>;
+				gpio-controller;
+			};
+		
+		};
+	};			
+};
+
