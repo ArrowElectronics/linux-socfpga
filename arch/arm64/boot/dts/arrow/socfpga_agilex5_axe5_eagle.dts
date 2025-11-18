@@ -3,7 +3,7 @@
  * Copyright (C) 2025, Arrow Electronics, Incorporated.
  */
 #include "../intel/socfpga_agilex5.dtsi"
-// #include "socfpga_agilex_ghrd.dtsi"
+#include "socfpga_agilex_ghrd.dtsi"
 
 
 / {
@@ -52,7 +52,7 @@
 };
 
 &gmac0 {
-	status = "disabled";
+	status = "okay";
 	phy-mode = "rgmii-id";
 	mac-mode = "gmii";
 	phy-handle = <&emac0_phy0>;
