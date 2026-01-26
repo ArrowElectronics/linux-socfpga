@@ -1,0 +1,9 @@
+# Enable altera pio functionality
+CONFIG_GPIO_ALTERA=y
+# Enable system id peripheral
+CONFIG_ALTERA_SYSID=y
+# Enable NTFS and FAT file support
+CONFIG_FAT_FS=y
+CONFIG_NTFS3_FS=y
+CONFIG_EXFAT_FS=y
+CONFIG_EXT4_FS=y
