@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0
+
+config DRM_ALTERA_VFR
+	tristate "Intel/Altera VVP Video Frame Reader DRM driver (fixed 1080p)"
+	depends on DRM && OF && HAS_IOMEM
+	select DRM_KMS_HELPER
+	select DRM_GEM_DMA_HELPER
+	select DRM_CLIENT_LIB
+	select DRM_CLIENT_SELECTION	
+	help
+	  DRM driver for the Intel/Altera VVP Video Frame Reader IP core used
+	  as a fixed 1920x1080 HDMI display endpoint.  The driver allocates a
+	  CMA-backed framebuffer, programs its physical address into the VFR
+	  buffer set 0 descriptor, and starts free-running DMA output.  All
+	  video timing and clock configuration is handled by the Qsys hardware.
+
+	  To compile as a module choose M; the module will be called
+	  altera-vfr-drm.

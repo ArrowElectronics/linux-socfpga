@@ -1,0 +1,147 @@
+/{
+	soc@0 {
+
+		sys_id: gpio@28000000 {
+				compatible = "altr,sysid-1.0";
+				reg = <0x28000000 0x08>;
+		};				 
+
+
+		button_pio: gpio@28000010 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000010 0x10>;
+				interrupt-parent = <&intc>;
+				interrupts = <0 17 4>;
+				altr,ngpio = <2>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				altr,interrupt-type = <IRQ_TYPE_EDGE_FALLING>;
+		};
+
+		dipsw_pio: gpio@28000020 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000020 0x10>;
+				interrupt-parent = <&intc>;
+				interrupts = <0 18 4>;
+				altr,ngpio = <2>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				altr,interrupt-type = <IRQ_TYPE_EDGE_BOTH>;
+		};	
+
+		led_pio0: gpio@28000030 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000030 0x10>;
+				altr,gpio-bank-width = <3>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				resetvalue = <7>;				
+		};
+		
+		led_pio1: gpio@28000040 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000040 0x10>;
+				altr,gpio-bank-width = <3>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				resetvalue = <7>;				
+		};
+		
+		led_pio2: gpio@28000050 {
+				compatible = "altr,pio-1.0";
+				reg = <0x28000050 0x10>;
+				altr,gpio-bank-width = <3>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				resetvalue = <7>;				
+		};
+		
+		led_pio3: gpio@28000060 {
+				status = "okay";
+				compatible = "altr,pio-1.0";
+				reg = <0x28000060 0x10>;
+				altr,gpio-bank-width = <3>;
+				#gpio-cells = <2>;
+				gpio-controller;
+				resetvalue = <7>;				
+		};
+		
+		display_controller: vfr@20008000 {
+				status = "okay";
+				compatible = "altr,vfr-drm-1.0";
+				reg = <0x20008000 0x400>,   	/* VFR registers */
+					  <0x20006000 0x200>;   	/* CVO registers */				
+				dma-noncoherent;
+		};		
+
+		soc_leds: leds {
+			compatible = "gpio-leds";
+			
+			fpga0_led_red {
+					label = "fpga_led0_red";
+					gpios = <&led_pio0 2 1>;
+			};
+		
+			fpga0_led_green {
+					label = "fpga_led0_green";
+					gpios = <&led_pio0 1 1>;
+			};	
+		
+			fpga0_led_blue {
+					label = "fpga_led0_blue";
+					gpios = <&led_pio0 0 1>;
+			};
+		
+			fpga1_led_red {
+					label = "fpga_led1_red";
+					gpios = <&led_pio1 2 1>;
+			};
+		
+			fpga1_led_green {
+					label = "fpga_led1_green";
+					gpios = <&led_pio1 1 1>;
+			};	
+		
+			fpga1_led_blue {
+					label = "fpga_led1_blue";
+					gpios = <&led_pio1 0 1>;
+			};
+		
+			fpga2_led_red {
+					label = "fpga_led2_red";
+					gpios = <&led_pio2 2 1>;
+			};
+		
+			fpga2_led_green {
+					label = "fpga_led2_green";
+					gpios = <&led_pio2 1 1>;
+			};	
+		
+			fpga2_led_blue {
+					label = "fpga_led2_blue";
+					gpios = <&led_pio2 0 1>;
+			};
+		
+			fpga3_led_red {
+					label = "fpga_led3_red";
+					gpios = <&led_pio3 2 1>;
+			};
+		
+			fpga3_led_green {
+					label = "fpga_led3_green";
+					gpios = <&led_pio3 1 1>;
+			};	
+		
+			fpga3_led_blue {
+					label = "fpga_led3_blue";
+					gpios = <&led_pio3 0 1>;
+			};			
+
+		};
+
+	};
+};

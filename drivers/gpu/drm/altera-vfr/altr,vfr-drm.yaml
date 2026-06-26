@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/display/altr,vfr-drm.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Intel/Altera VVP Video Frame Reader (VFR) DRM Display Controller
+
+description: |
+  The Intel/Altera VVP Suite Video Frame Reader IP core reads pixel data
+  from a Linux CMA-allocated framebuffer via its AXI DMA read master and
+  streams it to a fixed 1920x1080 HDMI output pipeline.
+
+  The "reg" property carries the base address of the VFR hardware IP
+  register block, as with any standard platform device.  The driver maps
+  this region at probe time and programs the CMA framebuffer physical
+  address into buffer set 0 at each atomic commit.
+
+  All video timing and pixel clock configuration is performed at Qsys /
+  Platform Designer build time and is fixed in hardware.
+
+properties:
+  compatible:
+    enum:
+      - altr,vfr-drm-1.0
+      - altr,vip-frame-reader-2.0
+
+  reg:
+    minItems: 2
+    maxItems: 2
+    items:
+      - description: >
+          Base address and size of the VFR hardware IP control register block,
+          as assigned in Qsys / Platform Designer and reflected in the SoC
+          address map.
+      - description: >
+          Base address and size of the CVO hardware IP control register block.
+          Required in Lite mode — the driver programs IMG_INFO_WIDTH and
+          IMG_INFO_HEIGHT at probe since the AXI4-S Lite stream carries no
+          frame dimension metadata.
+
+  interrupts:
+    maxItems: 1
+    description: VFR frame interrupt line.
+
+required:
+  - compatible
+  - reg
+
+additionalProperties: false
+
+examples:
+  - |
+    #include <dt-bindings/interrupt-controller/irq.h>
+
+    /*
+     * VFR hardware registers at 0xff200000 in the HPS-to-FPGA lightweight
+     * AXI bridge window (typical for Cyclone V / Arria 10 SoC).
+     * Adjust to match the address assigned in your Qsys system.
+     */
+    display-controller@20008000 {
+        compatible = "altr,vfr-drm-1.0";
+        reg = <0x20008000 0x400>,   /* VFR registers */
+              <0x20006000 0x200>;   /* CVO registers */
+        dma-noncoherent;
+    };
